@@ -1,0 +1,68 @@
+{
+  "planId": "cleaning-launch-v1",
+  "timezone": "America/New_York",
+  "initiatives": [
+    {
+      "id": "I01",
+      "startDate": "2026-10-12",
+      "targetDate": "2026-10-25"
+    }
+  ],
+  "cycles": [
+    {
+      "id": "CY01",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-18",
+      "capacityMinutes": {
+        "builder": 480
+      }
+    },
+    {
+      "id": "CY02",
+      "startDate": "2026-10-19",
+      "endDate": "2026-10-25",
+      "capacityMinutes": {
+        "builder": 300
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T001",
+      "initiativeId": "I01",
+      "cycleId": "CY01",
+      "readiness": "ready",
+      "resource": "builder",
+      "estimateMinutes": 240,
+      "startDate": "2026-10-12",
+      "dueDate": "2026-10-14",
+      "dependsOn": []
+    },
+    {
+      "id": "T002",
+      "initiativeId": "I01",
+      "cycleId": "CY01",
+      "readiness": "ready",
+      "resource": "builder",
+      "estimateMinutes": 180,
+      "startDate": "2026-10-15",
+      "dueDate": "2026-10-18",
+      "dependsOn": [
+        "T001"
+      ]
+    },
+    {
+      "id": "T003",
+      "initiativeId": "I01",
+      "cycleId": "CY02",
+      "readiness": "ready",
+      "resource": "builder",
+      "estimateMinutes": 300,
+      "startDate": "2026-10-19",
+      "dueDate": "2026-10-23",
+      "dependsOn": [
+        "T002"
+      ]
+    }
+  ]
+}

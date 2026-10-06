@@ -6,6 +6,10 @@ This is the reusable bootstrap repository. Its demo tests validate the harness; 
 
 ## Editing the bootstrap
 
+Use `skills/plan-sites-and-apps-adm/SKILL.md` for a new product interview and plan. Publish the agreed plan as a new It's a Plan project with phase initiatives, native cycles, granular tasks and directional dependencies. Preserve answers and existing authorization; resolve real calendar/capacity/team decisions.
+
+For planner changes run `python3 -m unittest discover -s skills/plan-sites-and-apps-adm/scripts -p 'test_*.py'` and the schedule example CLI in addition to repository validation.
+
 Run `python3 scripts/validate.py`. In `skills/site-bootstrap-adm/assets/fast-check-example` run `npm ci --ignore-scripts` and `npm test`. Keep local links/frontmatter/lockfile consistent and preserve the original source provenance.
 
 ## Preparing a website

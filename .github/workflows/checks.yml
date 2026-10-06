@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: '24.19.0'
       - run: python3 scripts/validate.py
+      - run: python3 -m unittest discover -s skills/plan-sites-and-apps-adm/scripts -p 'test_*.py'
+      - run: python3 skills/plan-sites-and-apps-adm/scripts/validate_schedule.py skills/plan-sites-and-apps-adm/assets/schedule-example.json
       - run: npm ci --ignore-scripts --no-audit --no-fund
         working-directory: skills/site-bootstrap-adm/assets/fast-check-example
       - run: npm test

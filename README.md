@@ -4,6 +4,23 @@ Template repository for Advanced Digital Marketing LTDA websites, with a bootstr
 
 The package has 46 setup requirement groups for static and server-enabled content websites. It covers pinned tooling, layouts, CMS content/build order, media, SEO, redirects, contact endpoints, privacy, testing and selected hosting. Each applicable task specifies files, configuration, commands, positive/negative tests, evidence and blockers.
 
+## Plan a new site or app
+
+Use the bundled [Plan Sites & Apps ADM skill](skills/plan-sites-and-apps-adm/SKILL.md) before bootstrap work. It has 88 question topics with website/app branches, an answer ledger, requirement-to-task mapping, phase initiatives, capacity-based cycles and launch criteria. It selects this website bootstrap or App-Bootstrap-ADM from the actual product requirements.
+
+After the interview and substantive plan review, it creates a new It's a Plan project with a plan document, initiatives, native dated cycles, granular tasks and blocking links. It reconciles interrupted writes and reads the structure back. Unknown dates/capacity and unresolved destination/provider choices stay visible.
+
+Install it alongside the bootstrap:
+
+```sh
+test ! -e ~/.agents/skills/plan-sites-and-apps-adm && \
+  cp -R skills/plan-sites-and-apps-adm ~/.agents/skills/
+```
+
+> Use $plan-sites-and-apps-adm to interview me about a new website, select the ADM bootstrap, and publish the agreed plan in It's a Plan with initiatives, tasks and cycles.
+
+The [schedule checker](skills/plan-sites-and-apps-adm/scripts/validate_schedule.py) checks dates, dependency order and resource capacity. It does not estimate work or prove product readiness. Planning does not execute a production launch.
+
 ## Lippincott template example
 
 [The worked example](skills/site-bootstrap-adm/references/lippincott-example.md) maps the inspected Astro/TinaCMS project into a neutral new-site foundation:
@@ -48,6 +65,8 @@ For apps use [App-Bootstrap-ADM](https://github.com/Bonobo791/App-Bootstrap-ADM)
 
 ```sh
 python3 scripts/validate.py
+python3 -m unittest discover -s skills/plan-sites-and-apps-adm/scripts -p 'test_*.py'
+python3 skills/plan-sites-and-apps-adm/scripts/validate_schedule.py skills/plan-sites-and-apps-adm/assets/schedule-example.json
 cd skills/site-bootstrap-adm/assets/fast-check-example
 npm ci --ignore-scripts
 npm test

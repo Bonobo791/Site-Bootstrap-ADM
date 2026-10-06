@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Sites & Apps ADM"
+  short_description: "Interview, scope and schedule a new site or app"
+  default_prompt: "Use $plan-sites-and-apps-adm to interview me about a new site or app, select the ADM bootstrap, and publish the agreed plan in It’s a Plan with initiatives, tasks and cycles."
