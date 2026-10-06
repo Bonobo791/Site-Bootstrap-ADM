@@ -1,0 +1,14 @@
+# Merge; retain the project lockfile.
+.env
+.env.*
+!.env.example
+!.env.test.example
+node_modules/
+dist/
+.astro/
+coverage/
+reports/mutation/
+playwright-report/
+test-results/
+.launch/
+*.log

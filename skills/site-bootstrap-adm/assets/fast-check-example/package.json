@@ -1,0 +1,16 @@
+{
+  "name": "bootstrap-fast-check-example",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "npm@11.9.0",
+  "scripts": {
+    "test": "node --test *.test.mjs"
+  },
+  "devDependencies": {
+    "fast-check": "4.9.0"
+  }
+}
