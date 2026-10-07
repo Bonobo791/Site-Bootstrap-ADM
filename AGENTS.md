@@ -1,21 +1,16 @@
-# Site-Bootstrap-ADM
+# Repository guidance
 
-Use `skills/site-bootstrap-adm/SKILL.md` when instantiating this template as a new website. Read the Lippincott worked example and expand applicable setup IDs into exact tasks before feature work.
+This repository is a small Astro/Node setup toolkit for self-hosted Coolify on Contabo. The copyable website lives in `skills/site-bootstrap-adm/assets/site`.
 
-This is the reusable bootstrap repository. Its demo tests validate the harness; they do not prove a newly instantiated website's behavior. Implement and verify the selected website pipeline in that target.
+Keep the two skills, runnable template, short READMEs, environment example, checks and license. Keep planning and verification records in the project tracker. Do not add source registers, research archives, worked examples, unrelated test demos or a second project planner.
 
-## Editing the bootstrap
+Use compatible Astro and Node adapter versions, one npm lockfile and the standalone production command. Preserve the content and URLs when applying the template to an existing website. Add services only when the website requires them.
 
-Use `skills/plan-sites-and-apps-adm/SKILL.md` for a new product interview and plan. Publish the agreed plan as a new It's a Plan project with phase initiatives, native cycles, granular tasks and directional dependencies. Preserve answers and existing authorization; resolve real calendar/capacity/team decisions.
+Before committing, run:
 
-For planner changes run `python3 -m unittest discover -s skills/plan-sites-and-apps-adm/scripts -p 'test_*.py'` and the schedule example CLI in addition to repository validation.
+```sh
+node scripts/check.mjs
+node scripts/test-toolkit.mjs
+```
 
-Run `python3 scripts/validate.py`. In `skills/site-bootstrap-adm/assets/fast-check-example` run `npm ci --ignore-scripts` and `npm test`. Keep local links/frontmatter/lockfile consistent and preserve the original source provenance.
-
-## Preparing a website
-
-Preserve the target's stack and instructions; prefer Astro for a fresh content site. Use local CMS generation/build without cloud credentials. Add selected server contact/preview/config routes with validation/origin/abuse/delivery contracts. Use fast-check against real website logic alongside regressions; inspect built output and mobile/desktop interactions.
-
-Track verified/pending/not-applicable setup evidence. Providers and release checks need actual observations. Keep branding, destinations, secrets and tracking IDs project-owned; tracking defaults off.
-
-Follow the target's branch/release policy and existing user authorization for pushes, merges, deployment and production access. Use App-Bootstrap-ADM for application accounts/data/billing workflows.
+For Docker or serving changes, also build the image and check the home page, assets, 404, health endpoint and build marker. Keep private values out of client settings and template defaults. Honor the user's authorization for publication and server changes.
