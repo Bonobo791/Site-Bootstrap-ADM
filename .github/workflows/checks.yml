@@ -1,4 +1,4 @@
-name: checks
+name: Check toolkit
 on:
   pull_request:
   push:
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  validate:
+  template:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -15,11 +15,14 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: '24.19.0'
-      - run: python3 scripts/validate.py
-      - run: python3 -m unittest discover -s skills/plan-sites-and-apps-adm/scripts -p 'test_*.py'
-      - run: python3 skills/plan-sites-and-apps-adm/scripts/validate_schedule.py skills/plan-sites-and-apps-adm/assets/schedule-example.json
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-        working-directory: skills/site-bootstrap-adm/assets/fast-check-example
-      - run: npm test
-        working-directory: skills/site-bootstrap-adm/assets/fast-check-example
+          node-version: 24.19.0
+      - run: node scripts/check.mjs
+      - run: node scripts/test-toolkit.mjs
+      - name: Build production image
+        run: docker build --build-arg SITE_URL=https://example.com --build-arg SOURCE_COMMIT=${{ github.sha }} -t site-toolkit skills/site-bootstrap-adm/assets/site
+      - name: Check container
+        run: |
+          docker run -d --name site-toolkit --read-only --tmpfs /tmp -p 127.0.0.1:4330:4321 site-toolkit
+          curl --fail --retry 10 --retry-connrefused --retry-delay 1 http://127.0.0.1:4330/healthz
+          curl --fail http://127.0.0.1:4330/ | grep -q 'Site template'
+          curl --fail http://127.0.0.1:4330/build.json | grep -q '${{ github.sha }}'
