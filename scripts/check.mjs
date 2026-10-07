@@ -1,15 +1,16 @@
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const read = path => readFileSync(path, 'utf8');
+const read = path => readFileSync(path, 'utf8').replaceAll('\r\n', '\n');
 function markdown(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
     if (['node_modules', '__pycache__'].includes(entry.name)) return [];
     const path = join(dir, entry.name);
-    return entry.isDirectory() ? markdown(path) : entry.name.endsWith('.md') ? [path] : [];
+    if (entry.isDirectory()) return markdown(path);
+    return entry.name.endsWith('.md') ? [path] : [];
   });
 }
 const skills = readdirSync(join(root, 'skills'), { withFileTypes: true }).filter(entry => entry.isDirectory());
@@ -20,10 +21,10 @@ for (const skill of skills) {
   assert.ok(existsSync(join(dir, 'agents/openai.yaml')), 'Missing skill metadata');
 }
 for (const path of [join(root, 'README.md'), join(root, 'AGENTS.md'), ...markdown(join(root, 'skills'))]) {
-  for (const match of read(path).matchAll(/\[[^\]]+\]\(([^)]+)\)/g)) {
+  for (const match of read(path).matchAll(/\[[^[\]\r\n]+\]\(([^()[\]\r\n]+)\)/g)) {
     if (/^(?:https?:|#)/.test(match[1])) continue;
     const target = resolve(dirname(path), match[1].split('#')[0]);
-    assert.ok(target.startsWith(root + '/') && existsSync(target), `Broken local link in ${path}: ${match[1]}`);
+    assert.ok(target.startsWith(root + sep) && existsSync(target), `Broken local link in ${path}: ${match[1]}`);
   }
 }
 const dir = join(root, 'skills/site-bootstrap-adm/assets/site');
