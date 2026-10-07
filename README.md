@@ -6,19 +6,25 @@ This repository is a website-preparation toolkit, not a deployable website. It d
 
 ## Quick start
 
-For an agent that supports skills in `~/.agents/skills`, install the website skill from the repository root:
+For an agent that supports skills in `~/.agents/skills`, install the planner and website bootstrap skills from the repository root:
 
 ```sh
 mkdir -p ~/.agents/skills
+test ! -e ~/.agents/skills/plan-sites-and-apps-adm && \
+  cp -R skills/plan-sites-and-apps-adm ~/.agents/skills/
 test ! -e ~/.agents/skills/site-bootstrap-adm && \
   cp -R skills/site-bootstrap-adm ~/.agents/skills/
 ```
 
 Use the host's corresponding skill directory when it differs. If the skill already exists, review and merge changes deliberately.
 
-Then ask your agent to prepare the actual website project. For example:
+For a new site whose requirements are not agreed, run the planner first:
 
-> Use $site-bootstrap-adm to prepare [project path or repository] as a website for [purpose and audience]. Preserve the existing stack; for a new content site, prefer Astro. Keep undecided CMS, contact, analytics, and hosting choices visible for me. Create the bootstrap and setup-task records, verify the site's real build and tests, and document the selected host's launch steps.
+> Use $plan-sites-and-apps-adm to interview me about a new website, select the ADM bootstrap, and publish the agreed plan in It's a Plan with initiatives, tasks, and cycles.
+
+After agreeing the plan, or when you already have an agreed plan, ask your agent to prepare the actual website project from it. For example:
+
+> Use $site-bootstrap-adm to prepare [project path or repository] from the agreed website plan for [purpose and audience]. Preserve the existing stack; for a new content site, prefer Astro. Keep undecided CMS, contact, analytics, and hosting choices visible for me. Create the bootstrap and setup-task records, verify the site's real build and tests, and document the selected host's launch steps.
 
 Your coding agent needs access to the actual website project. The skill prepares and verifies work there. The site's build, hosting, and release procedure depends on its stack and selected host, so this repository has no universal `npm run dev` or deployment command. Follow the commands recorded in the prepared project's README and `docs/release-runbook.md`. Production release follows that project's policy and authorization.
 
@@ -63,9 +69,10 @@ Use the bundled [Plan Sites & Apps ADM skill](skills/plan-sites-and-apps-adm/SKI
 
 After the interview and plan review, it can create an It's a Plan project with a plan document, initiatives, dated cycles, granular tasks, and blocking links. It reconciles interrupted writes and reads the structure back. Unknown dates, capacity, and provider decisions stay visible.
 
-Install it alongside the bootstrap:
+If you are installing the planner separately:
 
 ```sh
+mkdir -p ~/.agents/skills
 test ! -e ~/.agents/skills/plan-sites-and-apps-adm && \
   cp -R skills/plan-sites-and-apps-adm ~/.agents/skills/
 ```
