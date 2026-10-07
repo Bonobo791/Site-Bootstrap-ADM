@@ -40,7 +40,7 @@ try {
   server.stdout.on('data', chunk => {
     process.stdout.write(chunk);
     output = (output + chunk).slice(-4096);
-    base = output.match(/http:\/\/127\.0\.0\.1:\d+/)?.[0] ?? base;
+    base = /http:\/\/127\.0\.0\.1:\d+/.exec(output)?.[0] ?? base;
   });
   await waitForServer();
   const home = await fetch(base);
